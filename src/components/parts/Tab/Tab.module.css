@@ -1,0 +1,22 @@
+.tab-input {
+  display: none;
+}
+
+.tab-label {
+  display: block;
+  padding: 15px;
+  font-size: 12px;
+  line-height: 167%;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  text-align: center;
+  color: #4a4a4a;
+  height: 52px;
+  width: 168px;
+  cursor: pointer;
+}
+
+.tab-input:checked + .tab-label {
+  color: #fff;
+  background-color: #2196f3;
+}

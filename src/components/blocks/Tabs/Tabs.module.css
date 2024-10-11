@@ -1,0 +1,22 @@
+.tabs {
+  margin: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #dfe5ec;
+  border-radius: 5px;
+  list-style: none;
+  width: 504px;
+  height: 52px;
+  background-color: #fff;
+}
+
+.tabs > li:first-child > label {
+  border-right: 1px solid #dfe5ec;
+  border-radius: 5px 0 0 5px;
+}
+
+.tabs > li:last-child > label {
+  border-left: 1px solid #dfe5ec;
+  border-radius: 0 5px 5px 0;
+}

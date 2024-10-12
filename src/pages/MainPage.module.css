@@ -9,3 +9,9 @@
 .main-page__logo {
   margin-bottom: 50px;
 }
+
+.main-page__content {
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+}

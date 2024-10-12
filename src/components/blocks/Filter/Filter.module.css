@@ -1,0 +1,47 @@
+.filter {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  background-color: #fff;
+  border-radius: 5px;
+  width: 232px;
+  height: 252px;
+  padding: 20px;
+  box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.1);
+}
+
+.filter__title {
+  font-size: 12px;
+  line-height: 100%;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #4a4a4a;
+}
+
+.filter__label {
+  position: relative;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 154%;
+  color: #4a4a4a;
+  display: flex;
+  align-items: center;
+  padding-left: 30px;
+  cursor: pointer;
+}
+
+.filter__input {
+  appearance: none;
+}
+
+.filter__box {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background-image: url('/img/checkbox-off.svg');
+  left: 0;
+}
+
+.filter__input:checked + .filter__box {
+  background-image: url('/img/checkbox-on.svg');
+}

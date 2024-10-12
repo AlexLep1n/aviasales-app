@@ -1,5 +1,4 @@
 .tabs {
-  margin: 20px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -9,6 +8,7 @@
   width: 504px;
   height: 52px;
   background-color: #fff;
+  margin-bottom: 20px;
 }
 
 .tabs > li:first-child > label {

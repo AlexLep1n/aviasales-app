@@ -1,14 +1,10 @@
+import { useSelector } from 'react-redux';
 import cl from './Filter.module.css';
-import { useState, useEffect } from 'react';
+import { useActions } from '../../../hooks/useActions';
 
 export default function Filter() {
-  const [isAllChecked, setIsAllChecked] = useState(false);
-  const [checkboxes, setCheckboxes] = useState({
-    noTransfers: false,
-    oneTransfer: false,
-    twoTransfers: false,
-    threeTransfers: false,
-  });
+  const { checkboxes, isAllChecked } = useSelector((state) => state.filter);
+  const { selectAllFilters, checkboxChange, checkAllCheck } = useActions();
 
   const checkboxNames = {
     noTransfers: 'Без пересадок',
@@ -17,36 +13,14 @@ export default function Filter() {
     threeTransfers: '3 пересадки',
   };
 
-  // Функция обработки нажатия на checkbox "Все"
-  const handleSelectAll = () => {
-    const checkedState = !isAllChecked;
-    setIsAllChecked(checkedState);
-    setCheckboxes({
-      noTransfers: checkedState,
-      oneTransfer: checkedState,
-      twoTransfers: checkedState,
-      threeTransfers: checkedState,
-    });
-  };
-
   // Изменение состояния отдельно для каждого checkbox
   const handleCheckboxChange = (e) => {
     const { name, checked } = e.target;
-    setCheckboxes((prev) => ({ ...prev, [name]: checked }));
+    checkboxChange({ name, checked });
 
-    // Если хотя бы один checkbox unchecked, то убрать галочку с "Все",
-    if (!checked) {
-      setIsAllChecked(false);
-    }
+    // Проверям все checkboxes кроме "Все"
+    checkAllCheck();
   };
-
-  // Проверям все checkboxes кроме "Все"
-  useEffect(() => {
-    const allCheckboxesChecked = Object.values(checkboxes).every(Boolean);
-    if (allCheckboxesChecked) {
-      setIsAllChecked(true);
-    }
-  }, [checkboxes]);
 
   return (
     <div className={cl.filter}>
@@ -54,7 +28,7 @@ export default function Filter() {
 
       <label className={cl.filter__label}>
         <input
-          onChange={handleSelectAll}
+          onChange={() => selectAllFilters()}
           className={cl.filter__input}
           type="checkbox"
           checked={isAllChecked}

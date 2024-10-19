@@ -5,7 +5,7 @@ export default function Tabs() {
   return (
     <ul className={cl.tabs}>
       <li>
-        <Tab bindName={'cheapest'} labelContent={'Самый дешевый'} filterName={'tabs'} />
+        <Tab bindName={'cheapest'} labelContent={'Самый дешевый'} filterName={'tabs'} checked />
       </li>
       <li>
         <Tab bindName={'fastest'} labelContent={'Самый быстрый'} filterName={'tabs'} />

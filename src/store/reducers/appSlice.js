@@ -6,10 +6,10 @@ export const appSlice = createSlice({
   initialState: {
     filter: {
       checkboxes: {
-        noTransfers: true,
-        oneTransfer: true,
-        twoTransfers: true,
-        threeTransfers: true,
+        0: true,
+        1: true,
+        2: true,
+        3: true,
       },
       isAllChecked: true,
     },
@@ -17,18 +17,19 @@ export const appSlice = createSlice({
       entities: [],
       status: 'idle',
       error: false,
-      // stop: false,
     },
+    sortType: 'fastest',
+    // filteredTickets: [],
   },
   reducers: {
     selectAllFilters: (state) => {
       const checkedState = !state.filter.isAllChecked;
       state.filter.isAllChecked = checkedState;
       state.filter.checkboxes = {
-        noTransfers: checkedState,
-        oneTransfer: checkedState,
-        twoTransfers: checkedState,
-        threeTransfers: checkedState,
+        0: checkedState,
+        1: checkedState,
+        2: checkedState,
+        3: checkedState,
       };
     },
     checkboxChange: (state, { payload: { name, checked } }) => {
@@ -44,6 +45,22 @@ export const appSlice = createSlice({
         state.filter.isAllChecked = true;
       }
     },
+    // filterTickets: (state) => {
+    //   const transfers = Object.entries(state.checkboxes);
+    //   const curentTransfers = transfers
+    //     .map((filter) => {
+    //       if (filter[1]) {
+    //         return +filter[0];
+    //       }
+    //     })
+    //     .filter((key) => key);
+    //   entities.filter((ticket) => {
+    //     return (
+    //       curentTransfers.includes(ticket.segments[0].stops.length) ||
+    //       curentTransfers.includes(ticket.segments[1].stops.length)
+    //     );
+    //   });
+    // }
   },
   extraReducers: (builder) => {
     builder

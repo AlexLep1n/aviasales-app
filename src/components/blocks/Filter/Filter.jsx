@@ -7,10 +7,10 @@ export default function Filter() {
   const { selectAllFilters, checkboxChange, checkAllCheck } = useActions();
 
   const checkboxNames = {
-    noTransfers: 'Без пересадок',
-    oneTransfer: '1 пересадка',
-    twoTransfers: '2 пересадки',
-    threeTransfers: '3 пересадки',
+    0: 'Без пересадок',
+    1: '1 пересадка',
+    2: '2 пересадки',
+    3: '3 пересадки',
   };
 
   // Изменение состояния отдельно для каждого checkbox

@@ -3,7 +3,7 @@ import cl from './Filter.module.css';
 import { useActions } from '../../../hooks/useActions';
 
 export default function Filter() {
-  const { checkboxes, isAllChecked } = useSelector((state) => state.filter);
+  const { checkboxes, isAllChecked } = useSelector((state) => state.app.filter);
   const { selectAllFilters, checkboxChange, checkAllCheck } = useActions();
 
   const checkboxNames = {

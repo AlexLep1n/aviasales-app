@@ -1,8 +1,8 @@
 import Tabs from '../components/blocks/Tabs/Tabs';
 import logo from '/img/logo.svg';
 import cl from './MainPage.module.css';
-import Ticket from '../components/parts/Ticket/Ticket';
 import Filter from '../components/blocks/Filter/Filter';
+import TicketsList from '../components/blocks/TicketsList/TicketsList';
 
 export default function MainPage() {
   return (
@@ -13,7 +13,7 @@ export default function MainPage() {
           <Filter />
           <div>
             <Tabs />
-            <Ticket />
+            <TicketsList />
           </div>
         </section>
       </section>

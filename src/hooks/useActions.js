@@ -1,10 +1,10 @@
 import { bindActionCreators } from '@reduxjs/toolkit';
 import { useDispatch } from 'react-redux';
-import { filterSlice } from '../store/reducers/filterSlice';
+import { appSlice } from '../store/reducers/appSlice';
 import { useMemo } from 'react';
 
 const allActions = {
-  ...filterSlice.actions,
+  ...appSlice.actions,
 };
 
 export const useActions = () => {

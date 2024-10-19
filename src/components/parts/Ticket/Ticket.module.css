@@ -31,30 +31,3 @@
   flex-direction: column;
   gap: 10px;
 }
-
-.ticket__line {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.ticket__part {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: center;
-}
-
-.ticket__heading {
-  font-size: 12px;
-  line-height: 150%;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-  color: #a0b0b9;
-}
-
-.ticket__desc {
-  font-size: 14px;
-  line-height: 150%;
-  color: #4a4a4a;
-}

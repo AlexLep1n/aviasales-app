@@ -37,8 +37,6 @@ export default function TicketsList() {
     }
   }, [dispatch, status, entities, error, searchId, fetchSearchId]);
 
-  console.log(tickets.length);
-
   const show = !allCheckboxesUnChecked && tickets.length > 0;
 
   return (

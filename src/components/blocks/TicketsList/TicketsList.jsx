@@ -1,6 +1,6 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchTickets } from '../../../api/fetchTickets';
+import { fetchTickets, getSearchId } from '../../../api/fetchTickets';
 import Ticket from '../../parts/Ticket/Ticket';
 import { nanoid } from 'nanoid';
 import cl from './TicketsList.module.css';
@@ -14,15 +14,26 @@ export default function TicketsList() {
   // Получаем отфильтрованный и отсортированный массив билетов
   // и флаг не выбора всех checkbox`ов
   const [tickets, allCheckboxesUnChecked] = useTickets();
+  const searchIdRef = useRef();
 
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (status !== 'success') {
-      dispatch(fetchTickets());
+    const fetchSearchId = async () => {
+      searchIdRef.current = await getSearchId();
+      dispatch(fetchTickets(searchIdRef.current));
+    };
+    if (!searchIdRef.current) {
+      fetchSearchId();
     }
-    if (error) {
-      dispatch(fetchTickets());
+  }, [dispatch]);
+
+  useEffect(() => {
+    if (status !== 'success' && searchIdRef.current) {
+      dispatch(fetchTickets(searchIdRef.current));
+    }
+    if (error && searchIdRef.current) {
+      dispatch(fetchTickets(searchIdRef.current));
     }
   }, [dispatch, status, entities, error]);
 

@@ -9,13 +9,13 @@ export default function MainPage() {
     <>
       <section className={cl['main-page']}>
         <img className={cl['main-page__logo']} src={logo} alt="logo" />
-        <section className={cl['main-page__content']}>
+        <div className={cl['main-page__content']}>
           <Filter />
           <div>
             <Tabs />
             <TicketsList />
           </div>
-        </section>
+        </div>
       </section>
     </>
   );

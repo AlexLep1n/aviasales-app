@@ -3,19 +3,26 @@ import { add, format } from 'date-fns';
 import cl from './TicketLine.module.css';
 
 export default function TicketLine({ origin, destination, date, stops, duration }) {
-  // console.log(format(new Date(date), 'hhч mmм'));
-  // console.log(format(add(new Date(date), { minutes: duration }), 'hhч mmм'));
+  const startTime = new Date(date);
+  const endTime = add(startTime, { minutes: Number(duration) });
+
+  const formatDuration = (durationInMinutes) => {
+    const hours = Math.floor(durationInMinutes / 60);
+    const minutes = durationInMinutes % 60;
+    return `${hours}ч ${minutes}м`;
+  };
+
   return (
     <div className={cl.ticket__line}>
       <div className={cl.ticket__part}>
         <p className={cl.ticket__heading}>{`${origin} - ${destination}`}</p>
         <p className={cl.ticket__desc}>
-          {`${format(new Date(date), 'hh:mm')} - ${format(add(new Date(date), { minutes: duration }), 'hh:mm')}`}
+          {`${format(startTime, 'HH:mm')} - ${format(endTime, 'HH:mm')}`}
         </p>
       </div>
       <div className={cl.ticket__part}>
         <p className={cl.ticket__heading}>В пути</p>
-        <p className={cl.ticket__desc}>{format(new Date(duration * 60 * 1000), 'hhч mmм')}</p>
+        <p className={cl.ticket__desc}>{formatDuration(duration)}</p>
       </div>
       <div className={cl.ticket__part}>
         <p className={cl.ticket__heading}>

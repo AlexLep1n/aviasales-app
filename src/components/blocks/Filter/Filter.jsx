@@ -4,7 +4,7 @@ import { useActions } from '../../../hooks/useActions';
 
 export default function Filter() {
   const { checkboxes, isAllChecked } = useSelector((state) => state.app.filter);
-  const { selectAllFilters, checkboxChange, checkAllCheck } = useActions();
+  const { toggleAllFilters, checkboxChange, checkAllCheck } = useActions();
 
   const checkboxNames = {
     0: 'Без пересадок',
@@ -28,7 +28,7 @@ export default function Filter() {
 
       <label className={cl.filter__label}>
         <input
-          onChange={() => selectAllFilters()}
+          onChange={() => toggleAllFilters()}
           className={cl.filter__input}
           type="checkbox"
           checked={isAllChecked}

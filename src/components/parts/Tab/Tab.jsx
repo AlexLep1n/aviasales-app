@@ -1,7 +1,10 @@
 import PropTypes from 'prop-types';
 import cl from './Tab.module.css';
+import { useActions } from '../../../hooks/useActions';
 
 export default function Tab({ bindName, labelContent, filterName, checked }) {
+  const { changeSortTab } = useActions();
+
   return (
     <>
       <input
@@ -10,6 +13,7 @@ export default function Tab({ bindName, labelContent, filterName, checked }) {
         id={bindName}
         name={filterName}
         checked={checked}
+        onChange={() => changeSortTab(bindName)}
       />
       <label className={cl['tab-label']} htmlFor={bindName}>
         {labelContent}

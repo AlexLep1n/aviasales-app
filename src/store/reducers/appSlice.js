@@ -17,12 +17,12 @@ export const appSlice = createSlice({
       entities: [],
       status: 'idle',
       error: false,
+      stop: false,
     },
-    sortType: 'fastest',
-    // filteredTickets: [],
+    sortType: 'cheapest',
   },
   reducers: {
-    selectAllFilters: (state) => {
+    toggleAllFilters: (state) => {
       const checkedState = !state.filter.isAllChecked;
       state.filter.isAllChecked = checkedState;
       state.filter.checkboxes = {
@@ -45,22 +45,9 @@ export const appSlice = createSlice({
         state.filter.isAllChecked = true;
       }
     },
-    // filterTickets: (state) => {
-    //   const transfers = Object.entries(state.checkboxes);
-    //   const curentTransfers = transfers
-    //     .map((filter) => {
-    //       if (filter[1]) {
-    //         return +filter[0];
-    //       }
-    //     })
-    //     .filter((key) => key);
-    //   entities.filter((ticket) => {
-    //     return (
-    //       curentTransfers.includes(ticket.segments[0].stops.length) ||
-    //       curentTransfers.includes(ticket.segments[1].stops.length)
-    //     );
-    //   });
-    // }
+    changeSortTab: (state, { payload: currentTab }) => {
+      state.sortType = currentTab;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -69,6 +56,7 @@ export const appSlice = createSlice({
       })
       .addCase(fetchTickets.fulfilled, (state, { payload: { tickets, stop } }) => {
         state.tickets.entities = [...state.tickets.entities, ...tickets];
+        state.stop = stop;
         stop ? (state.tickets.status = 'success') : (state.tickets.status = 'loading');
         state.tickets.error = false;
       })
@@ -79,5 +67,5 @@ export const appSlice = createSlice({
   },
 });
 
-export const { selectAllFilters, checkboxChange, checkAllCheck } = appSlice.actions;
+export const { toggleAllFilters, checkboxChange, checkAllCheck, changeSortTab } = appSlice.actions;
 export default appSlice.reducer;

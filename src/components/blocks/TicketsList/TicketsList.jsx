@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchTickets, getSearchId } from '../../../api/fetchTickets';
 import Ticket from '../../parts/Ticket/Ticket';
@@ -6,6 +6,7 @@ import { nanoid } from 'nanoid';
 import cl from './TicketsList.module.css';
 import { useTickets } from '../../../hooks/useTickets';
 import { LinearProgress } from '@mui/material';
+import { useActions } from '../../../hooks/useActions';
 
 export default function TicketsList() {
   const { entities, status, error } = useSelector((state) => state.app.tickets);
@@ -14,28 +15,29 @@ export default function TicketsList() {
   // Получаем отфильтрованный и отсортированный массив билетов
   // и флаг не выбора всех checkbox`ов
   const [tickets, allCheckboxesUnChecked] = useTickets();
-  const searchIdRef = useRef();
+  const searchId = useSelector((state) => state.app.searchId);
 
+  const { createSearchId } = useActions();
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    const fetchSearchId = async () => {
-      searchIdRef.current = await getSearchId();
-      dispatch(fetchTickets(searchIdRef.current));
-    };
-    if (!searchIdRef.current) {
-      fetchSearchId();
-    }
-  }, [dispatch]);
+  const fetchSearchId = useCallback(async () => {
+    const searchIdData = await getSearchId();
+    createSearchId(searchIdData);
+  }, [createSearchId]);
 
   useEffect(() => {
-    if (status !== 'success' && searchIdRef.current) {
-      dispatch(fetchTickets(searchIdRef.current));
+    if (!searchId) {
+      fetchSearchId();
     }
-    if (error && searchIdRef.current) {
-      dispatch(fetchTickets(searchIdRef.current));
+    if (status !== 'success' && searchId) {
+      dispatch(fetchTickets(searchId));
     }
-  }, [dispatch, status, entities, error]);
+    if (error && searchId) {
+      dispatch(fetchTickets(searchId));
+    }
+  }, [dispatch, status, entities, error, searchId, fetchSearchId]);
+
+  console.log(tickets.length);
 
   const show = !allCheckboxesUnChecked && tickets.length > 0;
 

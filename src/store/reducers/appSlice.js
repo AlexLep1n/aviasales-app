@@ -4,6 +4,7 @@ import { fetchTickets } from '../../api/fetchTickets';
 export const appSlice = createSlice({
   name: 'app',
   initialState: {
+    searchId: '',
     filter: {
       checkboxes: {
         0: true,
@@ -17,11 +18,13 @@ export const appSlice = createSlice({
       entities: [],
       status: 'idle',
       error: false,
-      stop: false,
     },
     sortType: 'cheapest',
   },
   reducers: {
+    createSearchId: (state, { payload: searchIdData }) => {
+      state.searchId = searchIdData;
+    },
     toggleAllFilters: (state) => {
       const checkedState = !state.filter.isAllChecked;
       state.filter.isAllChecked = checkedState;
@@ -56,7 +59,6 @@ export const appSlice = createSlice({
       })
       .addCase(fetchTickets.fulfilled, (state, { payload: { tickets, stop } }) => {
         state.tickets.entities = [...state.tickets.entities, ...tickets];
-        state.stop = stop;
         stop ? (state.tickets.status = 'success') : (state.tickets.status = 'loading');
         state.tickets.error = false;
       })
@@ -67,5 +69,6 @@ export const appSlice = createSlice({
   },
 });
 
-export const { toggleAllFilters, checkboxChange, checkAllCheck, changeSortTab } = appSlice.actions;
+export const { createSearchId, toggleAllFilters, checkboxChange, checkAllCheck, changeSortTab } =
+  appSlice.actions;
 export default appSlice.reducer;

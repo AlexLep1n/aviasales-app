@@ -1,6 +1,6 @@
-/* eslint-disable react/prop-types */
 import { add, format } from 'date-fns';
 import cl from './TicketLine.module.css';
+import PropTypes from 'prop-types';
 
 export default function TicketLine({ origin, destination, date, stops, duration }) {
   const startTime = new Date(date);
@@ -37,3 +37,11 @@ export default function TicketLine({ origin, destination, date, stops, duration 
     </div>
   );
 }
+
+TicketLine.propTypes = {
+  origin: PropTypes.string.isRequired,
+  destination: PropTypes.string.isRequired,
+  date: PropTypes.string.isRequired,
+  stops: PropTypes.array.isRequired,
+  duration: PropTypes.number.isRequired,
+};

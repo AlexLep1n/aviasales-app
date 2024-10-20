@@ -28,7 +28,7 @@ export const useTickets = () => {
         curentTransfers.includes(String(ticket.segments[1].stops.length))
       );
     });
-  }, [checkboxes, entities, isAllChecked]);
+  }, [allCheckboxesUnChecked, checkboxes, entities, isAllChecked]);
 
   const filteredAndSortedTickets = useMemo(() => {
     const sortedTickets = [...filteredTickets];

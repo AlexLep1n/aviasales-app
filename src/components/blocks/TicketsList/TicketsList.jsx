@@ -11,6 +11,8 @@ export default function TicketsList() {
   const { entities, status, error } = useSelector((state) => state.app.tickets);
   const [ticketsCount, setTicketsCount] = useState(5);
 
+  // Получаем отфильтрованный и отсортированный массив билетов
+  // и флаг не выбора всех checkbox`ов
   const [tickets, allCheckboxesUnChecked] = useTickets();
 
   const dispatch = useDispatch();
@@ -36,11 +38,7 @@ export default function TicketsList() {
         )}
         {status === 'loading' && <LinearProgress />}
         {show &&
-          tickets
-            .slice(0, ticketsCount)
-            .map((ticket) => (
-              <Ticket key={nanoid()} {...ticket} onClick={() => console.log(ticket)} />
-            ))}
+          tickets.slice(0, ticketsCount).map((ticket) => <Ticket key={nanoid()} {...ticket} />)}
       </div>
 
       {show && (

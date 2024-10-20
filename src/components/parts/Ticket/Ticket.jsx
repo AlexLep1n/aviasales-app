@@ -3,10 +3,9 @@ import cl from './Ticket.module.css';
 import PropTypes from 'prop-types';
 import TicketLine from '../TicketLine/TicketLine';
 
-export default function Ticket({ price, carrier: iataCode, segments, onClick }) {
-  // console.log(segments);
+export default function Ticket({ price, carrier: iataCode, segments }) {
   return (
-    <div className={cl.ticket} onClick={onClick}>
+    <div className={cl.ticket}>
       <div className={cl.ticket__header}>
         <h3 className={cl.ticket__price}>{`${price} Р`}</h3>
         <img
@@ -28,5 +27,4 @@ Ticket.propTypes = {
   price: PropTypes.number,
   carrier: PropTypes.string,
   segments: PropTypes.array,
-  onClick: PropTypes.func,
 };

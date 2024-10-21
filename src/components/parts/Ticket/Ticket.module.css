@@ -31,3 +31,11 @@
   flex-direction: column;
   gap: 10px;
 }
+
+@media (max-width: 425px) {
+  .ticket {
+    padding: 10px;
+    gap: 10px;
+    width: 390px;
+  }
+}

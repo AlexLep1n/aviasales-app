@@ -2,3 +2,10 @@
   max-width: 1280px;
   margin: 0 auto;
 }
+
+@media (max-width: 425px) {
+  #root {
+    max-width: 425px;
+    margin: 0 auto;
+  }
+}

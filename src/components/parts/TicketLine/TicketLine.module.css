@@ -26,3 +26,12 @@
   line-height: 150%;
   color: #4a4a4a;
 }
+
+@media (max-width: 425px) {
+  .ticket__line {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+  }
+}

@@ -11,7 +11,7 @@ export default function MainPage() {
         <img className={cl['main-page__logo']} src={logo} alt="logo" />
         <div className={cl['main-page__content']}>
           <Filter />
-          <div>
+          <div className={cl['main-page__tabs-tickets']}>
             <Tabs />
             <TicketsList />
           </div>

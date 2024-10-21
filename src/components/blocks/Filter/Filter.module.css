@@ -47,3 +47,16 @@
 .filter__input:checked + .filter__box {
   background-image: url('/img/checkbox-on.svg');
 }
+
+@media (max-width: 425px) {
+  .filter {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 20px 0;
+  }
+
+  .filter__label {
+    width: 100%;
+  }
+}

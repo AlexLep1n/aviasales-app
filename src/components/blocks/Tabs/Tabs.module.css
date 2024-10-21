@@ -20,3 +20,11 @@
   border-left: 1px solid #dfe5ec;
   border-radius: 0 5px 5px 0;
 }
+
+@media (max-width: 425px) {
+  .tabs {
+    width: 390px;
+    height: 52px;
+    margin-bottom: 20px;
+  }
+}

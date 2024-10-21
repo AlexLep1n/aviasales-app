@@ -20,3 +20,13 @@
   color: #fff;
   background-color: #2196f3;
 }
+
+@media (max-width: 425px) {
+  .tab-label {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5px;
+    width: 130px;
+  }
+}

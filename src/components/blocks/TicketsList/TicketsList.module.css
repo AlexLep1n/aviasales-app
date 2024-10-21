@@ -1,6 +1,7 @@
 .tickets {
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: 20px;
   margin-bottom: 20px;
 }
@@ -30,4 +31,10 @@
   background-color: #2196f3;
   cursor: pointer;
   width: 100%;
+}
+
+@media (max-width: 425px) {
+  .tickets-notfound {
+    width: 92%;
+  }
 }

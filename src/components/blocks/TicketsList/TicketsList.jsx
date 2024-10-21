@@ -41,14 +41,14 @@ export default function TicketsList() {
   );
 
   return (
-    <div>
+    <>
       <div className={cl.tickets}>
         {allCheckboxesUnChecked && (
           <h2 className={cl['tickets-notfound']}>
             Рейсов, подходящих под заданные фильтры, не найдено
           </h2>
         )}
-        {status === 'loading' && <LinearProgress />}
+        {status === 'loading' && <LinearProgress style={{ width: '100%' }} />}
         {show &&
           tickets.slice(0, ticketsCount).map((ticket) => <Ticket key={ticket.id} {...ticket} />)}
       </div>
@@ -58,6 +58,6 @@ export default function TicketsList() {
           Показать еще 5 билетов!
         </button>
       )}
-    </div>
+    </>
   );
 }

@@ -1,8 +1,7 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchTickets, getSearchId } from '../../../api/fetchTickets';
 import Ticket from '../../parts/Ticket/Ticket';
-import { nanoid } from 'nanoid';
 import cl from './TicketsList.module.css';
 import { useTickets } from '../../../hooks/useTickets';
 import { LinearProgress } from '@mui/material';
@@ -26,18 +25,20 @@ export default function TicketsList() {
   }, [createSearchId]);
 
   useEffect(() => {
-    if (!searchId) {
-      fetchSearchId();
-    }
-    if (status !== 'success' && searchId) {
-      dispatch(fetchTickets(searchId));
-    }
-    if (error && searchId) {
-      dispatch(fetchTickets(searchId));
-    }
-  }, [dispatch, status, entities, error, searchId, fetchSearchId]);
+    const fetchTicketsIfNeeded = () => {
+      if (!searchId) {
+        fetchSearchId();
+      } else if (status !== 'success' || (error && searchId)) {
+        dispatch(fetchTickets(searchId));
+      }
+    };
+    fetchTicketsIfNeeded();
+  }, [dispatch, status, error, searchId, fetchSearchId, entities]);
 
-  const show = !allCheckboxesUnChecked && tickets.length > 0;
+  const show = useMemo(
+    () => !allCheckboxesUnChecked && tickets.length > 0,
+    [allCheckboxesUnChecked, tickets]
+  );
 
   return (
     <div>
@@ -49,7 +50,7 @@ export default function TicketsList() {
         )}
         {status === 'loading' && <LinearProgress />}
         {show &&
-          tickets.slice(0, ticketsCount).map((ticket) => <Ticket key={nanoid()} {...ticket} />)}
+          tickets.slice(0, ticketsCount).map((ticket) => <Ticket key={ticket.id} {...ticket} />)}
       </div>
 
       {show && (

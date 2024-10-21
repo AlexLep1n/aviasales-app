@@ -57,8 +57,8 @@ export const appSlice = createSlice({
       .addCase(fetchTickets.pending, (state) => {
         state.tickets.status = 'loading';
       })
-      .addCase(fetchTickets.fulfilled, (state, { payload: { tickets, stop } }) => {
-        state.tickets.entities = [...state.tickets.entities, ...tickets];
+      .addCase(fetchTickets.fulfilled, (state, { payload: { ticketsWithID, stop } }) => {
+        state.tickets.entities = [...state.tickets.entities, ...ticketsWithID];
         stop ? (state.tickets.status = 'success') : (state.tickets.status = 'loading');
         state.tickets.error = false;
       })

@@ -6,7 +6,7 @@
   border-radius: 5px;
   width: 232px;
   height: 252px;
-  padding: 20px;
+  padding: 20px 0;
   box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.1);
 }
 
@@ -17,6 +17,7 @@
   text-transform: uppercase;
   color: #4a4a4a;
   font-weight: 600;
+  padding: 0 20px;
 }
 
 .filter__label {
@@ -27,7 +28,7 @@
   color: #4a4a4a;
   display: flex;
   align-items: center;
-  padding-left: 30px;
+  padding: 0 20px 0 50px;
   cursor: pointer;
 }
 
@@ -40,7 +41,7 @@
   width: 20px;
   height: 20px;
   background-image: url('/img/checkbox-off.svg');
-  left: 0;
+  left: 20px;
 }
 
 .filter__input:checked + .filter__box {
